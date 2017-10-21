@@ -37,13 +37,17 @@ var pullResults = function(){
 
 
 
-// $("#search").on("click", function(){
-// 	pullResults();
 
-// })
+$(document).on("ready", function(){
+$("#search").on("click", function(){
+	console.log("click");
+	pullResults();
 
-// $("#clear").on("click", function(){
-// 	clearResults();
+})
+
+$("#clear").on("click", function(){
+	clearResults();
 
 
-// })
+})
+})
