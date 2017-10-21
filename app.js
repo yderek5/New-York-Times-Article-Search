@@ -7,10 +7,10 @@ var apiKey = "05f7127720fe4860ae0de8bea8301d88";
 var pullResults = function(){
 	searchTerms = $("#terms").val();
 	numResults = $("#num-results").val();
-	startYear = $("#start-year").val();
-	endYear = $("#end-year").val();
+	startYear = $("#start").val();
+	endYear = $("#end").val();
 
-	var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+	var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?";
 	queryURL += "&q=" + searchTerms + "&page=1";
 	if (startYear !== ""){
 		startYear += "0101";
@@ -22,28 +22,28 @@ var pullResults = function(){
 	}
 	queryURL += "&api-key=05f7127720fe4860ae0de8bea8301d88";
 
-
+	console.log(queryURL);
 	$.ajax({
 	        url: queryURL,
 	        method: "GET"
 	      }).done(function(response) {
 
 	      	console.log(response);
-
-
-	}
-
+	      	for (i in numResults){
+	      		console.log(response.docs[i].web_url)
+	      	}
+	})
 }
 
 
 
-$("#search").on("click", function(){
-	pullResults();
+// $("#search").on("click", function(){
+// 	pullResults();
 
-})
+// })
 
-$("#clear").on("click", function(){
-	clearResults();
+// $("#clear").on("click", function(){
+// 	clearResults();
 
 
-})
+// })
