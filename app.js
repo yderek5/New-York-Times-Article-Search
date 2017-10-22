@@ -1,49 +1,41 @@
-var searchTerms = "";
-var numResults = 0;
-var startYear = "";
-var endYear = "";
-var apiKey = "05f7127720fe4860ae0de8bea8301d88";
+// SETUP VARIABLES
+// ======================================
+var authKey = "e083b39755224a519981ab9182a837ef";
 
-var pullResults = function(){
-	searchTerms = $("#terms").val();
-	numResults = $("#num-results").val();
-	startYear = $("#start-year").val();
-	endYear = $("#end-year").val();
+// Search Terms
+var queryTerm =   "";
+var numResults =  0;
+var startYear =   0;
+var endYear =     0;
 
-	var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
-	queryURL += "&q=" + searchTerms + "&page=1";
-	if (startYear !== ""){
-		startYear += "0101";
-		queryURL += "&begin_date=" + startYear;
-	}
-	if (endYear !== ""){
-		endYear += "1231";
-		queryURL += "&end_date=" + endYear;
-	}
-	queryURL += "&api-key=05f7127720fe4860ae0de8bea8301d88";
+// URL Base
+var querryURLBase = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" + authKey;
 
+// Variable to Track number of articles
+var articleCouner = 0;
 
-	$.ajax({
-	        url: queryURL,
-	        method: "GET"
-	      }).done(function(response) {
+// FUNCTIONS
+// ======================================
+function runQuery(numArticles, queryURL) {
 
-	      	console.log(response);
+  // AJAX function
+  $.ajax({url: queryURL, method: "GET"})
+  .done(function(NYTData) {
+    console.log(NYTData);
+  });
+}
 
+// MAIN PROCESSES
+// ======================================
 
-	});
-
-};
-
-
-
-$("#search").on("click", function(){
-	pullResults();
-
+$("#searchButton").on("click", function() {
+  runQuery();
+  return false;
 });
 
-$("#clear").on("click", function(){
-	clearResults();
+// 1. Retrieve user inputs and convert to variables
+// 2. Use those variables to run on AJAX call to the New York Times.
+// 3. Break down the NYT Object into useable fields
+// 4. Dynamically generate html content
 
-
-});
+// 5. Dealing with "edge cases" -- bugs or situations that are not intuitive.
